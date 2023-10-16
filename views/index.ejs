@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Recipe</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main class="container">
+    <%if(locals.ingredientsList){%>
+      <div class="content">
+        <h2 id="recipe-title"> <%= name %> </h2>
+      </div>
+
+      <div class="content">
+        <ul>
+          <% ingredientsList.forEach(item => { %>
+
+            <% for (let index=0; index < item.measures.length;  index++){ %>
+              <li> <%= item.measures[index] %> - <%= item.ingredients[index] %> </li>
+            <% }; %>
+
+          <% }); %>
+        </ul>
+      </div>
+
+      <div class="content">
+        <p> <%= instructions %> </p>
+      </div>
+    <% }else{ %>
+      <h1>Choose any category</h1>
+    <% } %>
+
+    <% if (locals.error) {%>
+      <h2> <%= error %> </h2>
+    <% } %>
+  </main>
+
+  <section class="select">
+    <form action="/" id="form" class="form" method="POST">
+      <select name="category" class="form-select">
+        <option value="" data-display="select"> </option>
+        <option value="Beef">Beef</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Chicken">Chicken</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Goat">Goat</option>
+        <option value="Lamb">Lamb</option>
+        <option value="Miscellaneous">Miscellaneous</option>
+        <option value="Pasta">Pasta</option>
+        <option value="Pork">Pork</option>
+        <option value="Seafood">Seafood</option>
+        <option value="Side">Side</option>
+        <option value="Starter">Starter</option>
+        <option value="Vegan">Vegan</option>
+        <option value="Vegetarian">Vegetarian</option>
+      </select>
+      <button type="submit" class="form-submit">Go</button>
+    </form>
+  </section>
+</body>
+</html>
